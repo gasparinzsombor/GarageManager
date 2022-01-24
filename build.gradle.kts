@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation("com.fazecast:jSerialComm:2.8.2")
 }
 
 tasks.withType<KotlinCompile> {
