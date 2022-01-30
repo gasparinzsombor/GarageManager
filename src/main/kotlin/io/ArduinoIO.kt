@@ -4,18 +4,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.fazecast.jSerialComm.SerialPort
+import kotlinx.coroutines.MainScope
 
-class ArduinoIO {
-    var port: SerialPort? by mutableStateOf(null)
+open class ArduinoIO : IO {
+    private val scope = MainScope()
+
+    var device: SerialPort? by mutableStateOf(null)
+
+    var availableDevices by mutableStateOf(emptyArray<SerialPort>())
         private set
 
-    var availablePorts by mutableStateOf(emptyArray<SerialPort>())
-        private set
-
-    var onMessageReceived: ((Message) -> Unit)? = null
+    override var onMessageReceived: ((Message) -> Unit)? = null
 
     init {
-        availablePorts = SerialPort.getCommPorts()
+        availableDevices = SerialPort.getCommPorts()
     }
-
 }

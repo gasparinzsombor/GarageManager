@@ -1,4 +1,5 @@
 package io
 
-class Message {
-}
+import model.WaterLevel
+
+data class Message(val subject: String, val content: WaterLevel)

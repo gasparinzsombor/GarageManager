@@ -1,14 +1,22 @@
 package model
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import io.ArduinoIO
-import util.LCE
+import io.IO
+import io.Message
 
-class Model {
-    var state: LCE by mutableStateOf( LCE.Content )
+class Model(val io: IO) {
     val cleanWaterBarrel = Barrel()
     val dirtyWaterBarrel = Barrel()
-    val io = ArduinoIO()
+
+    init {
+        io.onMessageReceived = { onMessageReceived(it) }
+    }
+
+    private fun onMessageReceived(message: Message) {
+        if(message.subject == "cleanWaterBarrel") {
+            cleanWaterBarrel.level = message.content
+        }
+        else {
+            dirtyWaterBarrel.level = message.content
+        }
+    }
 }

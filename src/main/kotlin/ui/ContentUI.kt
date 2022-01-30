@@ -9,17 +9,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import model.Model
 import util.LCE
+import viewmodel.MainViewModel
 
 @Composable
 @Preview
-fun ContentUI(model: Model, padding: PaddingValues) {
+fun ContentUI(viewModel: MainViewModel, padding: PaddingValues) {
+    val appState = viewModel.state
+
     Box(modifier = Modifier.fillMaxSize().padding(10.dp), contentAlignment = Alignment.TopCenter) {
-        when(model.state) {
+        when(appState) {
             LCE.Loading -> LoadingUI()
-            LCE.Content -> InfoUI(model)
-            is LCE.Error<*> -> ErrorUI(model)
+            LCE.Content -> InfoUI(viewModel)
+            is LCE.Error<*> -> ErrorUI(appState.error)
         }
     }
 }

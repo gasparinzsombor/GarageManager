@@ -8,16 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import model.Model
+import viewmodel.MainViewModel
 
 @Preview
 @Composable
-fun InfoUI(model: Model) {
+fun InfoUI(viewModel: MainViewModel) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
-        BarrelInfoUI("Tiszta vizes hordó", model.cleanWaterBarrel)
+        BarrelInfoUI("Tiszta vizes hordó", viewModel.model.cleanWaterBarrel)
         Spacer(modifier = Modifier.height(10.dp))
-        BarrelInfoUI("Szennyvizes hordó", model.dirtyWaterBarrel)
+        BarrelInfoUI("Szennyvizes hordó", viewModel.model.dirtyWaterBarrel)
 
     }
 }

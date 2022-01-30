@@ -1,6 +1,5 @@
 package io
 
-/*interface IO {
+interface IO {
     var onMessageReceived: ((Message) -> Unit)?
-    var deviceNmae
-}*/
+}
